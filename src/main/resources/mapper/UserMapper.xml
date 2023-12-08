@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hk_ht.Mapper.IUserMapper">
+    <resultMap id="UserEntity" type="com.example.hk_ht.Entity.WxUser">
+        <id column="uid" property="uid"></id>
+        <result column="open_id" property="openId"></result>
+        <result column="session_key" property="sessionKey"></result>
+        <result column="avatar_url" property="avatarUrl"></result>
+    </resultMap>
+    <select id="findUserByOpenId" resultMap="UserEntity">
+        select *
+        from hk_user
+        where open_id =#{openId}
+    </select>
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="uid">
+        insert into hk_user (open_id, session_key, username, nickname, avatar_url, gender, city, province, country,
+                             token)
+        values (#{openId}, #{sessionKey}, #{username}, #{nickname}, #{avatarUrl}, #{gender}, #{city}, #{province},
+                #{country}, #{token})
+    </insert>
+
+
+</mapper>
